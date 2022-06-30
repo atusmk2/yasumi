@@ -77,14 +77,14 @@ namespace yasumi
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWpn(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"Damage +{damageplus}") {
-					OverrideColor = new Color(146, 248, 146)
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]") {
+					// OverrideColor = new Color(146, 248, 146)
 				};
 				tooltips.Add(line);
 			}
 			if ((CheckArm(item) || CheckAcc(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"Defense +{defenseplus}\n*Stats will be updated upon being worn.") {
-					OverrideColor = new Color(134, 134, 239)
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]\n[c/ffeb3b:*Stats will be updated upon being worn.]") {
+					// OverrideColor = new Color(134, 134, 239)
 				};
 				tooltips.Add(line);
 			}
