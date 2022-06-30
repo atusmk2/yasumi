@@ -1,5 +1,6 @@
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using yasumi.Items;
@@ -100,15 +101,17 @@ namespace yasumi
 				damage.Flat += damageplus;
 			}
 		}
-		// public override void SaveData(Item item, TagCompound tag)
-		// {
-		// 	tag["damageplus"] = damageplus;
-		// 	tag["defenseplus"] = defenseplus;
-		// }
-		// public override void LoadData(Item item, TagCompound tag)
-		// {
-		// 	damageplus = (int) tag["damageplus"];
-		// 	defenseplus = (int) tag["defenseplus"];
-		// }
+		public override void SaveData(Item item, TagCompound tag)
+		{
+			tag["damageplus"] = damageplus;
+			tag["defenseplus"] = defenseplus;
+		}
+		public override void LoadData(Item item, TagCompound tag)
+		{
+			if (tag["damageplus"] != null) {
+				damageplus = (int) tag["damageplus"];
+				defenseplus = (int) tag["defenseplus"];
+			}
+		}
 	}
 }
