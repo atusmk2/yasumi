@@ -4,6 +4,7 @@ using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using yasumi.Items;
+using System.IO;
 
 namespace yasumi
 {
@@ -113,5 +114,15 @@ namespace yasumi
 				defenseplus = (int) tag["defenseplus"];
 			}
 		}
-	}
+        public override void NetSend(Item item, BinaryWriter writer)
+        {
+			writer.Write(damageplus);
+			writer.Write(defenseplus);
+        }
+        public override void NetReceive(Item item, BinaryReader reader)
+        {
+			damageplus = reader.ReadByte();
+            defenseplus = reader.ReadByte();
+        }
+    }
 }
