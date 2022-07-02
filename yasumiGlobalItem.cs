@@ -45,8 +45,8 @@ namespace yasumi
 			else return 0;
 		}
 		public bool WeaponLimit() {
-			if (!Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 4)))) {return true;}
-			if (Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 4)))) {return true;}
+			if (!Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 8)))) {return true;}
+			if (Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 8)))) {return true;}
 			if (NPC.downedMoonlord && DamUpgrader()) {return true;}
 			return false;
 		}
