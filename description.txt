@@ -9,3 +9,8 @@ There's +40 Damage and/or +5 Defense Limit per-item in Pre-Harmode.
 +80 Damage and/or +10 Defense per-item in Pre-Moon Lord.
 
 Source code at Github: https://github.com/atusmk2/yasumi/
+
+Changelog
+=========
+
+v0.1.0 - Initial Release.
