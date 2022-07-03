@@ -5,27 +5,25 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using yasumi.Items;
 using System.IO;
+using Terraria.DataStructures;
 
 namespace yasumi
 {
-	public class yasumiUpgrade : GlobalItem {
+		public class yasumiUpgrade : GlobalItem {
 		public override bool InstancePerEntity => true;
+		
 		public int damageplus;
 		public int defenseplus;
 		public int damUp;
 		public int defUp;
 		public bool CheckAcc(Item Item) {return (Item.accessory == true);}
-		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable);}
+		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon));}
 		public bool CheckArm(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUP>()) {
 				damUp = 5;
 				return true;
 			}
-			// if (Main.mouseItem.type == ModContent.ItemType<energy_cube>()) {
-			// 	damUp = 20;
-			// 	return true;
-			// }
 			return false;
 		}
 		public bool DefUpgrader() {
@@ -33,10 +31,6 @@ namespace yasumi
 				defUp = 1;
 				return true;
 			}
-			// if (Main.mouseItem.type == ModContent.ItemType<energy_cube2>()) {
-			// 	defUp = 5;
-			// 	return true;
-			// }
 			return false;
 		}
 		public int LvLimit() {
@@ -79,13 +73,11 @@ namespace yasumi
 		{
 			if (CheckWpn(item) && damageplus > 0) {
 				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]") {
-					// OverrideColor = new Color(146, 248, 146)
 				};
 				tooltips.Add(line);
 			}
 			if ((CheckArm(item) || CheckAcc(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]\n[c/ffeb3b:*Stats will be updated upon being worn.]") {
-					// OverrideColor = new Color(134, 134, 239)
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}][c/ffeb3b:*Stats will be updated upon being worn.]") {
 				};
 				tooltips.Add(line);
 			}
@@ -98,7 +90,7 @@ namespace yasumi
 		}
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
-			if (damageplus > 0) {
+			if (damageplus > 0 && !item.CountsAsClass(DamageClass.Summon)) {
 				damage.Flat += damageplus;
 			}
 		}

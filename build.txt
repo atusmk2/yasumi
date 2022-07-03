@@ -1,4 +1,4 @@
 displayName = Yet Another Stats Upgrader Mod, Isn't?
 author = atus
-version = 0.1.0
+version = 0.1.1
 side = Client
