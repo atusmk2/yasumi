@@ -13,5 +13,6 @@ Source code at [Github.](https://github.com/atusmk2/yasumi/)
 Changelog
 =========
 
+v0.1.2 - Increase drop chances for upgrader items, now at 1/150 from any enemies.
 v0.1.1 - Disabled for Summon weapons because it didn't work correctly.
 v0.1.0 - Initial Release.

@@ -3,11 +3,10 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using yasumi.Items;
 using System.IO;
 using Terraria.DataStructures;
 
-namespace yasumi
+namespace yasumi.Items
 {
 		public class yasumiUpgrade : GlobalItem {
 		public override bool InstancePerEntity => true;
