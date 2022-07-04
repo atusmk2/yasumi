@@ -76,7 +76,7 @@ namespace yasumi.Items
 				tooltips.Add(line);
 			}
 			if ((CheckArm(item) || CheckAcc(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}][c/ffeb3b:*Stats will be updated upon being worn.]") {
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]\n[c/ffeb3b:*Stats will be updated upon being worn.]") {
 				};
 				tooltips.Add(line);
 			}
