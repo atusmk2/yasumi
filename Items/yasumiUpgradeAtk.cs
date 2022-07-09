@@ -8,26 +8,15 @@ using Terraria.DataStructures;
 
 namespace yasumi.Items
 {
-		public class yasumiUpgrade : GlobalItem {
+		public class yasumiUpgradeAttack : GlobalItem {
 		public override bool InstancePerEntity => true;
 		
 		public int damageplus;
-		public int defenseplus;
 		public int damUp;
-		public int defUp;
-		public bool CheckAcc(Item Item) {return (Item.accessory == true);}
 		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon));}
-		public bool CheckArm(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUP>()) {
 				damUp = 5;
-				return true;
-			}
-			return false;
-		}
-		public bool DefUpgrader() {
-			if (Main.mouseItem.type == ModContent.ItemType<DefenseUP>()) {
-				defUp = 1;
 				return true;
 			}
 			return false;
@@ -43,16 +32,9 @@ namespace yasumi.Items
 			if (NPC.downedMoonlord && DamUpgrader()) {return true;}
 			return false;
 		}
-		public bool ArmorLimit() {
-			if (!Main.hardMode && ((DefUpgrader() && defenseplus < LvLimit()))) {return true;}
-			if (Main.hardMode && ((DefUpgrader() && defenseplus < LvLimit()))) {return true;}
-			if (NPC.downedMoonlord && DefUpgrader()) {return true;}
-			return false;
-		}
 		public override bool CanRightClick(Item Item)
 		{
 			if (CheckWpn(Item) && WeaponLimit()) {return true;}
-			if ((CheckAcc(Item) || CheckArm(Item)) && ArmorLimit()) {return true;}
 			return false;
 		}
 		public override void RightClick(Item Item, Player player)
@@ -62,31 +44,14 @@ namespace yasumi.Items
 				Item.stack++;
 				Main.mouseItem.stack--;
 			}
-			if ((CheckArm(Item) || CheckAcc(Item)) && DefUpgrader()) {
-				defenseplus += defUp;
-				Item.stack++;
-				Main.mouseItem.stack--;
-			}
 		}
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWpn(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]") {
-				};
-				tooltips.Add(line);
-			}
-			if ((CheckArm(item) || CheckAcc(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]\n[c/ffeb3b:*Stats will be updated upon being worn.]") {
-				};
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]");
 				tooltips.Add(line);
 			}
 		}		
-		public override void UpdateEquip(Item Item, Player player)
-		{
-			if (defenseplus > 0) {
-				Item.defense = Item.OriginalDefense + defenseplus;
-			}
-		}
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
 			if (damageplus > 0 && !item.CountsAsClass(DamageClass.Summon)) {
@@ -96,24 +61,20 @@ namespace yasumi.Items
 		public override void SaveData(Item item, TagCompound tag)
 		{
 			tag["damageplus"] = damageplus;
-			tag["defenseplus"] = defenseplus;
 		}
 		public override void LoadData(Item item, TagCompound tag)
 		{
 			if (tag["damageplus"] != null) {
 				damageplus = (int) tag["damageplus"];
-				defenseplus = (int) tag["defenseplus"];
 			}
 		}
-        public override void NetSend(Item item, BinaryWriter writer)
-        {
-			writer.Write(damageplus);
-			writer.Write(defenseplus);
-        }
-        public override void NetReceive(Item item, BinaryReader reader)
-        {
-			damageplus = reader.ReadByte();
-            defenseplus = reader.ReadByte();
-        }
-    }
+		public override void NetSend(Item item, BinaryWriter writer)
+		{
+			writer.Write7BitEncodedInt(damageplus);
+		}
+		public override void NetReceive(Item item, BinaryReader reader)
+		{
+			damageplus = reader.Read7BitEncodedInt();
+		}
+	}
 }
