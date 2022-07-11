@@ -1,18 +1,17 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.IO;
-using Terraria.DataStructures;
+using yasumi.Common;
 
 namespace yasumi.Items
 {
 		public class yasumiUpgradeAttack : GlobalItem {
 		public override bool InstancePerEntity => true;
-		
 		public int damageplus;
-		public int damUp;
+		internal int maxDamage = ModContent.GetInstance<yasumiConfig>().maxDamage;
+		internal int damUp;
 		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon));}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUP>()) {
@@ -21,15 +20,10 @@ namespace yasumi.Items
 			}
 			return false;
 		}
-		public int LvLimit() {
-			if (!Main.hardMode) {return 5;}
-			if (Main.hardMode) {return 10;}
-			else return 0;
-		}
 		public bool WeaponLimit() {
-			if (!Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 8)))) {return true;}
-			if (Main.hardMode && ((DamUpgrader() && damageplus < (LvLimit() * 8)))) {return true;}
-			if (NPC.downedMoonlord && DamUpgrader()) {return true;}
+			if (!Main.hardMode && ((DamUpgrader() && damageplus < 40))) {return true;}
+			if (Main.hardMode && ((DamUpgrader() && damageplus < 80))) {return true;}
+			if (NPC.downedMoonlord && damageplus < maxDamage && DamUpgrader()) {return true;}
 			return false;
 		}
 		public override bool CanRightClick(Item Item)

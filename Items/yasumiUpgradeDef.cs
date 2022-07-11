@@ -3,6 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using System.Collections.Generic;
 using System.IO;
+using yasumi.Common;
 
 namespace yasumi.Items
 {
@@ -10,7 +11,8 @@ namespace yasumi.Items
 		public override bool InstancePerEntity => true;
 		
 		public int defenseplus;
-		public int defUp;
+		internal int maxDefense = ModContent.GetInstance<yasumiConfig>().maxDefense;
+		internal int defUp;
 		public bool CheckAcc(Item Item) {return (Item.accessory == true);}
 		public bool CheckArm(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
 		public bool DefUpgrader() {
@@ -20,15 +22,10 @@ namespace yasumi.Items
 			}
 			return false;
 		}
-		public int LvLimit() {
-			if (!Main.hardMode) {return 5;}
-			if (Main.hardMode) {return 10;}
-			else return 0;
-		}
 		public bool ArmorLimit() {
-			if (!Main.hardMode && ((DefUpgrader() && defenseplus < LvLimit()))) {return true;}
-			if (Main.hardMode && ((DefUpgrader() && defenseplus < LvLimit()))) {return true;}
-			if (NPC.downedMoonlord && DefUpgrader()) {return true;}
+			if (!Main.hardMode && ((DefUpgrader() && defenseplus < 5))) {return true;}
+			if (Main.hardMode && ((DefUpgrader() && defenseplus < 10))) {return true;}
+			if (NPC.downedMoonlord && defenseplus < maxDefense && DefUpgrader()) {return true;}
 			return false;
 		}
 		public override bool CanRightClick(Item Item)

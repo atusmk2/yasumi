@@ -9,7 +9,7 @@ namespace yasumi.Common
 	public class yasumiGlobalDrop : GlobalNPC
 	{
 		public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
-			if (!NPCID.Sets.CountsAsCritter[npc.type] && !NPCID.Sets.ProjectileNPC[npc.type] && !npc.townNPC) {
+			if (!NPCID.Sets.CountsAsCritter[npc.type] && !NPCID.Sets.ProjectileNPC[npc.type] && !npc.townNPC && !npc.boss) {
 				npcLoot.Add(ItemDropRule.OneFromOptions(150, ModContent.ItemType<AttackUP>(), ModContent.ItemType<DefenseUP>()));
 			}
 			if (!Main.hardMode && (npc.life > 1000 || npc.boss)) {
