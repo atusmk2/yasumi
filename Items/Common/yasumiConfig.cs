@@ -9,8 +9,8 @@ namespace yasumi.Common
 
 		[Header("Configure Maximum Upgrade")]
 		[Label("Set Maximum Damage")]
-		[Tooltip("Default is 120.\nOnly applies post Moon Lord.")]
-		[Increment(5)]
+		[Tooltip("Default is 120.\nOnly applied post Moon Lord.")]
+		[Increment(10)]
 		[Range(80, 500)]
 		[DefaultValue("120")]
 		[Slider]

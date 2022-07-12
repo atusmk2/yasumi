@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using System.Collections.Generic;
@@ -12,10 +13,16 @@ namespace yasumi.Items
 		public int damageplus;
 		internal int maxDamage = ModContent.GetInstance<yasumiConfig>().maxDamage;
 		internal int damUp;
-		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon));}
+		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon)) && !Item.accessory;}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUP>()) {
 				damUp = 5;
+				return true;
+			}
+			return false;
+		}
+		public bool Resetter() {
+			if (Main.mouseItem.type == ModContent.ItemType<Resetter>()) {
 				return true;
 			}
 			return false;
@@ -29,12 +36,19 @@ namespace yasumi.Items
 		public override bool CanRightClick(Item Item)
 		{
 			if (CheckWpn(Item) && WeaponLimit()) {return true;}
+			if (CheckWpn(Item) && damageplus != 0 && Resetter()) {return true;}
 			return false;
 		}
 		public override void RightClick(Item Item, Player player)
 		{
 			if (CheckWpn(Item) && DamUpgrader()) {
 				damageplus += damUp;
+				Item.stack++;
+				Main.mouseItem.stack--;
+			}
+			if (CheckWpn(Item) && Resetter()) {
+				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<AttackUP>(), damageplus / 5);
+				damageplus -= damageplus;
 				Item.stack++;
 				Main.mouseItem.stack--;
 			}

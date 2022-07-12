@@ -1,4 +1,5 @@
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ namespace yasumi.Items
 {
 		public class yasumiUpgradeDefense : GlobalItem {
 		public override bool InstancePerEntity => true;
-		
 		public int defenseplus;
 		internal int maxDefense = ModContent.GetInstance<yasumiConfig>().maxDefense;
 		internal int defUp;
@@ -18,6 +18,12 @@ namespace yasumi.Items
 		public bool DefUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<DefenseUP>()) {
 				defUp = 1;
+				return true;
+			}
+			return false;
+		}
+		public bool Resetter() {
+			if (Main.mouseItem.type == ModContent.ItemType<Resetter>()) {
 				return true;
 			}
 			return false;
@@ -31,12 +37,19 @@ namespace yasumi.Items
 		public override bool CanRightClick(Item Item)
 		{
 			if ((CheckAcc(Item) || CheckArm(Item)) && ArmorLimit()) {return true;}
+			if ((CheckAcc(Item) || CheckArm(Item)) && defenseplus != 0 && Resetter()) {return true;}
 			return false;
 		}
 		public override void RightClick(Item Item, Player player)
 		{
 			if ((CheckArm(Item) || CheckAcc(Item)) && DefUpgrader()) {
 				defenseplus += defUp;
+				Item.stack++;
+				Main.mouseItem.stack--;
+			}
+			if ((CheckArm(Item) || CheckAcc(Item)) && Resetter()) {
+				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<DefenseUP>(), defenseplus);
+				defenseplus -= defenseplus;
 				Item.stack++;
 				Main.mouseItem.stack--;
 			}
@@ -54,6 +67,9 @@ namespace yasumi.Items
 		{
 			if (defenseplus > 0) {
 				Item.defense = Item.OriginalDefense + defenseplus;
+			}
+			if (defenseplus == 0) {
+				Item.defense = Item.OriginalDefense;
 			}
 		}
 		public override void SaveData(Item item, TagCompound tag)
