@@ -68,7 +68,9 @@ namespace yasumi.Items
 		}
 		public override void SaveData(Item item, TagCompound tag)
 		{
-			tag["damageplus"] = damageplus;
+			if (damageplus > 0) {
+				tag["damageplus"] = damageplus;
+			}
 		}
 		public override void LoadData(Item item, TagCompound tag)
 		{

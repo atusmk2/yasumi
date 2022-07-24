@@ -7,7 +7,7 @@ namespace yasumi.Common
 	{
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
-		[Header("Configure Maximum Upgrade")]
+		[Header("Configure Maximum Per-Item Upgrade")]
 		[Label("Set Maximum Damage")]
 		[Tooltip("Default is 120.\nOnly applied post Moon Lord.")]
 		[Increment(10)]
@@ -17,8 +17,8 @@ namespace yasumi.Common
 		[ReloadRequired]
 		public int maxDamage;
 		[Label("Set Maximum Defense")]
- 		[Tooltip("Default is 20.\nOnly applies post Moon Lord.")]
-		[Range(10, 100)]
+ 		[Tooltip("Default is 20.\nOnly applied post Moon Lord.")]
+		[Range(20, 50)]
 		[DefaultValue("20")]
 		[Slider]
 		[ReloadRequired]

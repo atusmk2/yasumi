@@ -15,6 +15,7 @@ Source code at [Github.](https://github.com/atusmk2/yasumi/)
 Changelog
 =========
 
+v0.1.6 - Fixed issue with GlobalItem's leftover data.  
 v0.1.5 - Added Resetter item, now you can get your upgrades back by applying this on upgraded items. Crafted using 2 mana crystals on any workbenches.  
 v0.1.4 - Added config to set maximum upgrade limit post-Moon Lord.  
 v0.1.3 - Initial Multiplayer support, hope it works. -- IMPORTANT: any previously upgraded item stats will be lost because of some internal changes, sorry.  
