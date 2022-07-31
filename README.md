@@ -14,6 +14,7 @@ Source code at [Github.](https://github.com/atusmk2/yasumi/)
 
 Changelog
 =========
+v0.1.7 - Rebalancing drop chances, now at 1/200 from normal enemies.  
 v0.1.6 - Fixed issue with GlobalItem's leftover data.  
 v0.1.5 - Added Resetter item, now you can get your upgrades back by applying this on upgraded items. Crafted using 2 mana crystals on any workbenches.  
 v0.1.4 - Added config to set maximum upgrade limit post-Moon Lord.  
