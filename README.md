@@ -8,13 +8,15 @@ Check Bestiary to see upgrader's drop rates.
 There's +40 Damage and/or +5 Defense limit per-item in Pre-Harmode.  
 +80 Damage and/or +10 Defense limit per-item in Pre-Moon Lord.  
 
-Note: Might incompatible with non-vanilla reforging method, use Resetter item first before you reforge.  
+Note: Might incompatible with any reforging method, use Resetter item first before you reforge.  
 
-Source code at [Github.](https://github.com/atusmk2/yasumi/)
+Source code at [Github.](https://github.com/atusmk2/yasumi/)  
 
 Changelog
 =========
-v0.1.7 - Rebalancing drop chances, now at 1/200 from normal enemies.  
+v0.1.7 - Added Summon-type weapon upgrader (Experimental). Crafted using "Attack UP", and vice-versa.  
+  *Note: ALL Minion/Sentry damage will be updated only if you are holding any summon-type weapon with upgraded stats.  
+v0.1.6.1 - Rebalancing drop chances, now at 1/200 from normal enemies.  
 v0.1.6 - Fixed issue with GlobalItem's leftover data.  
 v0.1.5 - Added Resetter item, now you can get your upgrades back by applying this on upgraded items. Crafted using 2 mana crystals on any workbenches.  
 v0.1.4 - Added config to set maximum upgrade limit post-Moon Lord.  

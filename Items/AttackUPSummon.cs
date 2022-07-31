@@ -7,18 +7,18 @@ using Terraria.ModLoader;
 
 namespace yasumi.Items
 {
-	public class AttackUP : ModItem
+	public class AttackUPSummon : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Attack UP");
-			Tooltip.SetDefault("Right Click on weapon to add +5 Damage.");
+			DisplayName.SetDefault("Attack UP (Summon)");
+			Tooltip.SetDefault("Right Click on summon weapon to add +2 Damage.");
 			// Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3,8));
 			// ItemID.Sets.AnimatesAsSoul[Item.type] = true;
 			ItemID.Sets.ItemNoGravity[Item.type] = false;
 		}
 		public override void SetDefaults() {
-			Item.width = 28;
+			Item.width = 30;
 			Item.height = 28;
 			Item.consumable = true;
 			Item.maxStack = 999;
@@ -30,7 +30,7 @@ namespace yasumi.Items
 		public override void AddRecipes()
 		{
 			CreateRecipe()
-				.AddIngredient<AttackUPSummon>()
+				.AddIngredient<AttackUP>()
 				.Register();
 		}
 	}
