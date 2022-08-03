@@ -1,5 +1,4 @@
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using System.Collections.Generic;
@@ -64,7 +63,7 @@ namespace yasumi.Items
 		}		
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
-			if (damageplus > 0 && item.CountsAsClass(DamageClass.Summon)) {
+			if (damageplus > 0 && item.CountsAsClass(DamageClass.Summon)) { // This actually does nothing on summon weapon, just for showing numbers.
 				damage.Flat += damageplus;
 			}
 		}

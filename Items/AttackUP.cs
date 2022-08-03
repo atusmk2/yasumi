@@ -1,7 +1,5 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -13,8 +11,6 @@ namespace yasumi.Items
 		{
 			DisplayName.SetDefault("Attack UP");
 			Tooltip.SetDefault("Right Click on weapon to add +5 Damage.");
-			// Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(3,8));
-			// ItemID.Sets.AnimatesAsSoul[Item.type] = true;
 			ItemID.Sets.ItemNoGravity[Item.type] = false;
 		}
 		public override void SetDefaults() {
