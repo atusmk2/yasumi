@@ -1,0 +1,25 @@
+Mods: {
+	yasumi: {
+		Items: {
+			AttackUP: {
+				DisplayName: Attack UP
+				Tooltip: Right Click on weapon to add +5 Damage.
+			}
+
+			AttackUPSummon: {
+				DisplayName: Attack UP (Summon)
+				Tooltip: Right Click on summon weapon to add +2 Damage.
+			}
+
+			DefenseUP: {
+				DisplayName: Defense UP
+				Tooltip: Right Click on armor/accessories to add +1 Defense.
+			}
+
+			Resetter: {
+				DisplayName: Resetter
+				Tooltip: Right Click on upgraded item to reset to its default stats.
+			}
+		}
+	}
+}

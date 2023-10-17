@@ -9,15 +9,13 @@ namespace yasumi.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Defense UP");
-			Tooltip.SetDefault("Right Click on armor/accessories to add +1 Defense.");
 			ItemID.Sets.ItemNoGravity[Item.type] = false;
 		}
 		public override void SetDefaults() {
 			Item.width = 26;
 			Item.height = 28;
 			Item.consumable = true;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.rare = ItemRarityID.Purple;
 		}
 		public override void PostUpdate() {

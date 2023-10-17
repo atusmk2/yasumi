@@ -10,9 +10,8 @@ namespace yasumi.Items
 		public class yasumiUpgradeAttack : GlobalItem {
 		public override bool InstancePerEntity => true;
 		public int damageplus;
-		internal int maxDamage = ModContent.GetInstance<yasumiConfig>().maxDamage;
 		internal int damUp;
-		public bool CheckWpn(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon)) && !Item.accessory;}
+		public bool CheckWeapon(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && !Item.CountsAsClass(DamageClass.Summon)) && !Item.accessory;}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUP>()) {
 				damUp = 5;
@@ -26,26 +25,21 @@ namespace yasumi.Items
 			}
 			return false;
 		}
-		public bool WeaponLimit() {
-			if (!Main.hardMode && ((DamUpgrader() && damageplus < 40))) {return true;}
-			if (Main.hardMode && ((DamUpgrader() && damageplus < 80))) {return true;}
-			if (NPC.downedMoonlord && damageplus < maxDamage && DamUpgrader()) {return true;}
-			return false;
-		}
+		
 		public override bool CanRightClick(Item Item)
 		{
-			if (CheckWpn(Item) && WeaponLimit()) {return true;}
-			if (CheckWpn(Item) && damageplus != 0 && Resetter()) {return true;}
+			if (CheckWeapon(Item) && DamUpgrader()) {return true;}
+			if (CheckWeapon(Item) && damageplus != 0 && Resetter()) {return true;}
 			return false;
 		}
 		public override void RightClick(Item Item, Player player)
 		{
-			if (CheckWpn(Item) && DamUpgrader()) {
+			if (CheckWeapon(Item) && DamUpgrader()) {
 				damageplus += damUp;
 				Item.stack++;
 				Main.mouseItem.stack--;
 			}
-			if (CheckWpn(Item) && Resetter()) {
+			if (CheckWeapon(Item) && Resetter()) {
 				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<AttackUP>(), damageplus / 5);
 				damageplus -= damageplus;
 				Item.stack++;
@@ -54,7 +48,7 @@ namespace yasumi.Items
 		}
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
-			if (CheckWpn(item) && damageplus > 0) {
+			if (CheckWeapon(item) && damageplus > 0) {
 				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]");
 				tooltips.Add(line);
 			}

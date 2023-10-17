@@ -10,10 +10,9 @@ namespace yasumi.Items
 		public class yasumiUpgradeDefense : GlobalItem {
 		public override bool InstancePerEntity => true;
 		public int defenseplus;
-		internal int maxDefense = ModContent.GetInstance<yasumiConfig>().maxDefense;
 		internal int defUp;
-		public bool CheckAcc(Item Item) {return (Item.accessory == true);}
-		public bool CheckArm(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
+		public bool CheckAccessories(Item Item) {return (Item.accessory == true);}
+		public bool CheckArmor(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
 		public bool DefUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<DefenseUP>()) {
 				defUp = 1;
@@ -27,26 +26,20 @@ namespace yasumi.Items
 			}
 			return false;
 		}
-		public bool ArmorLimit() {
-			if (!Main.hardMode && ((DefUpgrader() && defenseplus < 5))) {return true;}
-			if (Main.hardMode && ((DefUpgrader() && defenseplus < 10))) {return true;}
-			if (NPC.downedMoonlord && defenseplus < maxDefense && DefUpgrader()) {return true;}
-			return false;
-		}
 		public override bool CanRightClick(Item Item)
 		{
-			if ((CheckAcc(Item) || CheckArm(Item)) && ArmorLimit()) {return true;}
-			if ((CheckAcc(Item) || CheckArm(Item)) && defenseplus != 0 && Resetter()) {return true;}
+			if ((CheckAccessories(Item) || CheckArmor(Item)) && DefUpgrader()) {return true;}
+			if ((CheckAccessories(Item) || CheckArmor(Item)) && defenseplus != 0 && Resetter()) {return true;}
 			return false;
 		}
 		public override void RightClick(Item Item, Player player)
 		{
-			if ((CheckArm(Item) || CheckAcc(Item)) && DefUpgrader()) {
+			if ((CheckArmor(Item) || CheckAccessories(Item)) && DefUpgrader()) {
 				defenseplus += defUp;
 				Item.stack++;
 				Main.mouseItem.stack--;
 			}
-			if ((CheckArm(Item) || CheckAcc(Item)) && Resetter()) {
+			if ((CheckArmor(Item) || CheckAccessories(Item)) && Resetter()) {
 				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<DefenseUP>(), defenseplus);
 				defenseplus -= defenseplus;
 				Item.stack++;
@@ -55,7 +48,7 @@ namespace yasumi.Items
 		}
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
-			if ((CheckArm(item) || CheckAcc(item)) && defenseplus > 0) {
+			if ((CheckArmor(item) || CheckAccessories(item)) && defenseplus > 0) {
 				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]");
 				var line2 = new TooltipLine(Mod, "yasumi", "[c/ffeb3b:*Stats will be updated upon being worn.]");
 				tooltips.Add(line);

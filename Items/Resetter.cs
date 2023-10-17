@@ -9,15 +9,13 @@ namespace yasumi.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Resetter");
-			Tooltip.SetDefault("Right Click on upgraded item to reset to its default stats.");
 			ItemID.Sets.ItemNoGravity[Item.type] = false;
 		}
 		public override void SetDefaults() {
 			Item.width = 34;
 			Item.height = 34;
 			Item.consumable = true;
-			Item.maxStack = 999;
+			Item.maxStack = 9999;
 			Item.rare = ItemRarityID.Purple;
 		}
 		public override void PostUpdate() {
