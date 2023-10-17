@@ -5,19 +5,19 @@ Untested in Multiplayer, please do report if you find any bugs.
 
 Check Bestiary to see upgrader's drop rates.  
 
-~~There's +40 Damage and/or +5 Defense limit per-item in Pre-Harmode.  ~~
-~~+80 Damage and/or +10 Defense limit per-item in Pre-Moon Lord.  ~~
-~~For Summon-type weapon, damage will increase on ALL currently summoned minion/sentry ONLY when you hold summon-type weapon with upgraded stats.  ~~
-~~Normal and Summon attack upgrader are inter-craftable by hands.  ~~
-Removed these limitations because why imposing hardcoded limit if you have **SELF RESTRAIN**.
+~~There's +40 Damage and/or +5 Defense limit per-item in Pre-Harmode.  ~~  
+~~+80 Damage and/or +10 Defense limit per-item in Pre-Moon Lord.  ~~  
+~~For Summon-type weapon, damage will increase on ALL currently summoned minion/sentry ONLY when you hold summon-type weapon with upgraded stats.  ~~  
+~~Normal and Summon attack upgrader are inter-craftable by hands.  ~~  
+Removed these limitations because why imposing hardcoded limit if you have **SELF RESTRAIN**.  
 
 Note: - Might incompatible with any reforging method, use Resetter item first before you reforge.  
-      - Item that changes upon being right-clicked (Example: Thor's Hammer from Thorium mod) cannot be upgraded and will glitch itself if doing so. **You have been warned**.
+      - Item that changes upon being right-clicked (Example: Thor's Hammer from Thorium mod) cannot be upgraded and will glitch itself if doing so. **You have been warned**.  
 Source code at [Github.](https://github.com/atusmk2/yasumi/)  
 
-Changelog
+Changelog  
 =========
-v0.1.8 - Update for 1.4.4 Tmodloader and removed hardcoded limitations.
+v0.1.8 - Update for 1.4.4 Tmodloader and removed hardcoded limitations.  
 v0.1.7 - Added Summon-type weapon upgrader (Experimental). Crafted using "Attack UP" by hands, also can be converted back!  
   *Note: ALL Minion/Sentry damage will be updated when you are holding summon-type weapon with upgraded stats.  
 v0.1.6.1 - Rebalancing drop chances, now at 1/200 from normal enemies.  
