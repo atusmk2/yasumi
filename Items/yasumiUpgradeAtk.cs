@@ -49,14 +49,14 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWeapon(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus}]");
+				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUP>()}] [c/92f892:Damage +{damageplus * 4}%]");
 				tooltips.Add(line);
 			}
 		}		
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
 			if (damageplus > 0 && !item.CountsAsClass(DamageClass.Summon)) {
-				damage.Flat += damageplus;
+				damage += (0.04f * damageplus);
 			}
 		}
 		public override void SaveData(Item item, TagCompound tag)

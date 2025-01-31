@@ -17,6 +17,7 @@ Source code at [Github.](https://github.com/atusmk2/yasumi/)
 
 Changelog  
 =========
+v0.1.9 - Changed +5 flat damage to +20% damage bonus per upgrade on non-summon items.
 v0.1.8 - Update for 1.4.4 Tmodloader and removed hardcoded limitations.  
 v0.1.7 - Added Summon-type weapon upgrader (Experimental). Crafted using "Attack UP" by hands, also can be converted back!  
   *Note: ALL Minion/Sentry damage will be updated when you are holding summon-type weapon with upgraded stats.  
