@@ -3,7 +3,7 @@ Mods: {
 		Items: {
 			AttackUP: {
 				DisplayName: Attack UP
-				Tooltip: Right Click on weapon to add +5 Damage.
+				Tooltip: Right Click on weapon to add +20% Damage.
 			}
 
 			AttackUPSummon: {
@@ -21,5 +21,7 @@ Mods: {
 				Tooltip: Right Click on upgraded item to reset to its default stats.
 			}
 		}
+
+		Damagetext: "[c/71B471:+{0}% Damage] "
 	}
 }
