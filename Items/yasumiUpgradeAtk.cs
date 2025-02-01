@@ -55,7 +55,7 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWeapon(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", Damagetext.Format(damageplus * 20)+$"[i:{ModContent.ItemType<AttackUP>()}]");
+				var line = new TooltipLine(Mod, "yasumi", Damagetext.Format(damageplus * 20, item.OriginalDamage));
 				tooltips.Add(line);
 			}
 		}		

@@ -22,6 +22,20 @@ Mods: {
 			}
 		}
 
-		Damagetext: "[c/71B471:+{0}% Damage] "
+		Damagetext:
+			'''
+			[c/71B471:+{0}% damage] [i:yasumi/AttackUP]
+			[c/71B471: Original item damage is {1}.]
+			'''
+		Damagetextsummon:
+			'''
+			[c/71B471:+{0}% damage (when held, applied to all your summoned projectiles as well).] [i:yasumi/AttackUPSummon]
+			[c/71B471: Original item damage is {1}.]
+			'''
+		Defensetext:
+			'''
+			[c/71B471:+{0} defense (when worn).] [i:yasumi/DefenseUP]
+			[c/71B471:Original item defense is {1}.]
+			'''
 	}
 }

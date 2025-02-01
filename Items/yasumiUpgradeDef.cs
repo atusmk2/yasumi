@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.Localization;
 using System.Collections.Generic;
 using System.IO;
 using yasumi.Common;
@@ -10,6 +11,10 @@ namespace yasumi.Items
 		public class yasumiUpgradeDefense : GlobalItem {
 		public override bool InstancePerEntity => true;
 		public int defenseplus;
+		public static LocalizedText Defensetext { get; private set;}
+        public override void SetStaticDefaults() {
+			Defensetext = Mod.GetLocalization("Defensetext");
+		}
 		internal int defUp;
 		public bool CheckAccessories(Item Item) {return (Item.accessory == true);}
 		public bool CheckArmor(Item Item) {return (Item.headSlot != -1 || Item.bodySlot != -1 || Item.legSlot != -1);}
@@ -49,10 +54,8 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if ((CheckArmor(item) || CheckAccessories(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<DefenseUP>()}] [c/92f892:Defense +{defenseplus}]");
-				var line2 = new TooltipLine(Mod, "yasumi", "[c/ffeb3b:*Stats will be updated upon being worn.]");
+				var line = new TooltipLine(Mod, "yasumi", Defensetext.Format(defenseplus, item.OriginalDefense));
 				tooltips.Add(line);
-				tooltips.Add(line2);
 			}
 		}		
 		public override void UpdateEquip(Item Item, Player player)

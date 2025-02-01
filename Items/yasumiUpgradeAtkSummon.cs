@@ -1,6 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Terraria.Localization;
 using System.Collections.Generic;
 using System.IO;
 using yasumi.Common;
@@ -10,11 +11,15 @@ namespace yasumi.Items
 		public class yasumiUpgradeAttackSummon : GlobalItem {
 		public override bool InstancePerEntity => true;
 		public int damageplus;
+		public static LocalizedText Damagetextsummon { get; private set;}
+        public override void SetStaticDefaults() {
+			Damagetextsummon = Mod.GetLocalization("Damagetextsummon");
+		}
 		internal int damUp;
 		public bool CheckWeaponSummon(Item Item) {return (Item.stack == 1 && Item.damage > 0 && !Item.consumable && Item.CountsAsClass(DamageClass.Summon)) && !Item.accessory;}
 		public bool DamUpgrader() {
 			if (Main.mouseItem.type == ModContent.ItemType<AttackUPSummon>()) {
-				damUp = 2;
+				damUp = 1;
 				return true;
 			}
 			return false;
@@ -40,7 +45,7 @@ namespace yasumi.Items
 				Main.mouseItem.stack--;
 			}
 			if (CheckWeaponSummon(Item) && Resetter()) {
-				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<AttackUPSummon>(), damageplus / 2);
+				player.QuickSpawnItem(player.GetSource_Misc("drop"), ModContent.ItemType<AttackUPSummon>(), damageplus);
 				damageplus -= damageplus;
 				Item.stack++;
 				Main.mouseItem.stack--;
@@ -49,16 +54,14 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWeaponSummon(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", $"[i:{ModContent.ItemType<AttackUPSummon>()}] [c/92f892:Damage +{damageplus}]");
-				var line2 = new TooltipLine(Mod, "yasumi", "[c/ffeb3b:*ALL Minion/Sentry damage will be updated when holding this item.]");
+				var line = new TooltipLine(Mod, "yasumi", Damagetextsummon.Format(damageplus * 20, item.OriginalDamage));
 				tooltips.Add(line);
-				tooltips.Add(line2);
 			}
 		}		
 		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
 		{
 			if (damageplus > 0 && item.CountsAsClass(DamageClass.Summon)) { // This actually does nothing on summon weapon, just for showing numbers.
-				damage.Flat += damageplus;
+				damage += (0.2f * damageplus);
 			}
 		}
 		public override void SaveData(Item item, TagCompound tag)
@@ -96,7 +99,7 @@ namespace yasumi.Items
 			int bruh = item.GetGlobalItem<yasumiUpgradeAttackSummon>().damageplus;
 			if (item.CountsAsClass(DamageClass.Summon) && bruh > 0)
 			{
-				modifiers.FlatBonusDamage += bruh;
+				modifiers.ScalingBonusDamage += bruh * 0.2f ;
 			}
 		}
 	}
