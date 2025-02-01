@@ -4,7 +4,6 @@ using Terraria.ModLoader.IO;
 using Terraria.Localization;
 using System.Collections.Generic;
 using System.IO;
-using yasumi.Common;
 
 namespace yasumi.Items
 {
@@ -12,7 +11,7 @@ namespace yasumi.Items
 		public override bool InstancePerEntity => true;
 		public int defenseplus;
 		public static LocalizedText Defensetext { get; private set;}
-        public override void SetStaticDefaults() {
+		public override void SetStaticDefaults() {
 			Defensetext = Mod.GetLocalization("Defensetext");
 		}
 		internal int defUp;
@@ -54,7 +53,7 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if ((CheckArmor(item) || CheckAccessories(item)) && defenseplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", Defensetext.Format(defenseplus, item.OriginalDefense));
+				var line = new TooltipLine(Mod, "yasumi", Defensetext.Format(defenseplus, defenseplus, item.OriginalDefense));
 				tooltips.Add(line);
 			}
 		}		

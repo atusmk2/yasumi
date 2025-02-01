@@ -4,7 +4,6 @@ using Terraria.ModLoader.IO;
 using Terraria.Localization;
 using System.Collections.Generic;
 using System.IO;
-using yasumi.Common;
 
 namespace yasumi.Items
 {
@@ -12,7 +11,7 @@ namespace yasumi.Items
 		public override bool InstancePerEntity => true;
 		public int damageplus;
 		public static LocalizedText Damagetextsummon { get; private set;}
-        public override void SetStaticDefaults() {
+		public override void SetStaticDefaults() {
 			Damagetextsummon = Mod.GetLocalization("Damagetextsummon");
 		}
 		internal int damUp;
@@ -54,7 +53,7 @@ namespace yasumi.Items
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
 			if (CheckWeaponSummon(item) && damageplus > 0) {
-				var line = new TooltipLine(Mod, "yasumi", Damagetextsummon.Format(damageplus * 20, item.OriginalDamage));
+				var line = new TooltipLine(Mod, "yasumi", Damagetextsummon.Format(damageplus * 20, damageplus, item.OriginalDamage));
 				tooltips.Add(line);
 			}
 		}		

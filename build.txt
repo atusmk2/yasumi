@@ -1,4 +1,4 @@
 displayName = Yet Another Stats Upgrader Mod, Isn't?
 author = atus
-version = 0.1.9
+version = 0.2.0
 sortBefore = TerrariaOverhaul

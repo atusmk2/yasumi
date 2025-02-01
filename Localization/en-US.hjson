@@ -3,12 +3,12 @@ Mods: {
 		Items: {
 			AttackUP: {
 				DisplayName: Attack UP
-				Tooltip: Right Click on weapon to add +20% Damage.
+				Tooltip: Right Click on weapon to add +20% damage.
 			}
 
 			AttackUPSummon: {
 				DisplayName: Attack UP (Summon)
-				Tooltip: Right Click on summon weapon to add +2 Damage.
+				Tooltip: Right Click on summon weapon to add +20% summon damage.
 			}
 
 			DefenseUP: {
@@ -24,18 +24,19 @@ Mods: {
 
 		Damagetext:
 			'''
-			[c/71B471:+{0}% damage] [i:yasumi/AttackUP]
-			[c/71B471: Original item damage is {1}.]
+			[c/71B471:+{0}% damage] ([i:yasumi/AttackUP] x {1})
+			[c/71B471: Original item damage is {2}.]
 			'''
 		Damagetextsummon:
 			'''
-			[c/71B471:+{0}% damage (when held, applied to all your summoned projectiles as well).] [i:yasumi/AttackUPSummon]
-			[c/71B471: Original item damage is {1}.]
+			[c/71B471:+{0}% damage when held] ([i:yasumi/AttackUPSummon] x {1})
+			[c/71B471:(Applied to all your summon-damage projectiles as well).]
+			[c/71B471: Original item damage is {2}.]
 			'''
 		Defensetext:
 			'''
-			[c/71B471:+{0} defense (when worn).] [i:yasumi/DefenseUP]
-			[c/71B471:Original item defense is {1}.]
+			[c/71B471:+{0} defense (when worn).] ([i:yasumi/DefenseUP] x {1})
+			[c/71B471:Original item defense is {2}.]
 			'''
 	}
 }
